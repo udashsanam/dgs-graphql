@@ -1,19 +1,27 @@
 package com.learn.dgsgraphql.datafetcher;
 
+import com.learn.dgsgraphql.codegen.types.Show;
 import com.learn.dgsgraphql.codegen.types.ShowCategory;
 import com.learn.dgsgraphql.repository.ShowRepository;
+import com.learn.dgsgraphql.service.ArtWorkService;
 import com.netflix.graphql.dgs.DgsComponent;
+import com.netflix.graphql.dgs.DgsData;
+import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
 import com.netflix.graphql.dgs.DgsQuery;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @DgsComponent
 public class LolomoDatafetcher {
 
     private final ShowRepository showRepository;
+    private final ArtWorkService artWorkService;
 
-    public LolomoDatafetcher(ShowRepository showRepository) {
+    public LolomoDatafetcher(ShowRepository showRepository,
+                             ArtWorkService artWorkService) {
         this.showRepository = showRepository;
+        this.artWorkService = artWorkService;
     }
 
     @DgsQuery
@@ -21,4 +29,12 @@ public class LolomoDatafetcher {
         return List.of(ShowCategory.newBuilder().id(1).name("Top 10").shows(showRepository.showForCategory(1)).build(),
                 ShowCategory.newBuilder().id(1).name("Continue Watching").shows(showRepository.showForCategory(2)).build());
     }
+
+    @DgsData(parentType = "Show")
+    public String artworkUrl(DgsDataFetchingEnvironment dfe){
+        Show show = dfe.getSource();
+        return artWorkService.generateForTitle(show.getTitle());
+    }
+
+
 }

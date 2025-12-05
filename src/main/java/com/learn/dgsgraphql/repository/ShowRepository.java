@@ -12,7 +12,7 @@ public class ShowRepository {
     private final static List<Show> shows = List.of(
             Show.newBuilder().title("The Witcher").build(),
             Show.newBuilder().title("Wednesday").build(),
-            Show.newBuilder().title("Sweet Toth").build(),
+            Show.newBuilder().title("Sweet To0th").build(),
             Show.newBuilder().title("Black Mirror").build(),
             Show.newBuilder().title("Sex Education").build(),
             Show.newBuilder().title("Manifest").build(),
