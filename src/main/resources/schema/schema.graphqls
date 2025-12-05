@@ -1,0 +1,14 @@
+type Query {
+    loloma: [ShowCategory]
+}
+
+type ShowCategory {
+    id: Int
+    name: String
+    shows: [Show]
+}
+
+type Show {
+    title: String
+    artworkUrl:String
+}

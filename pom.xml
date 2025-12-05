@@ -76,9 +76,9 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <schemaPaths>
-                                <param>src/main/resources/graphql-client</param>
-                            </schemaPaths>
+<!--                            <schemaPaths>-->
+<!--                                <param>src/main/resources/graphql-client</param>-->
+<!--                            </schemaPaths>-->
                             <packageName>com.learn.dgsgraphql.codegen</packageName>
                             <addGeneratedAnnotation>true</addGeneratedAnnotation>
                             <disableDatesInGeneratedAnnotation>true</disableDatesInGeneratedAnnotation>
