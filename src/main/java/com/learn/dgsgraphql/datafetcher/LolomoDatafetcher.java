@@ -1,13 +1,11 @@
 package com.learn.dgsgraphql.datafetcher;
 
+import com.learn.dgsgraphql.codegen.types.SearchFilter;
 import com.learn.dgsgraphql.codegen.types.Show;
 import com.learn.dgsgraphql.codegen.types.ShowCategory;
 import com.learn.dgsgraphql.repository.ShowRepository;
 import com.learn.dgsgraphql.service.ArtWorkService;
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
-import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
-import com.netflix.graphql.dgs.DgsQuery;
+import com.netflix.graphql.dgs.*;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,6 +32,12 @@ public class LolomoDatafetcher {
     public String artworkUrl(DgsDataFetchingEnvironment dfe){
         Show show = dfe.getSource();
         return artWorkService.generateForTitle(show.getTitle());
+    }
+
+    @DgsQuery
+    public List<Show> search(@InputArgument SearchFilter searchFilter){
+        return showRepository.allShows().stream().filter(show -> show.getTitle().toLowerCase().startsWith(searchFilter.getTitle().toLowerCase()))
+                .toList();
     }
 
 

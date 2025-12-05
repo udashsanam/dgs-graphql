@@ -1,5 +1,6 @@
 type Query {
     loloma: [ShowCategory]
+    search(searchFilter: SearchFilter):[Show]
 }
 
 type ShowCategory {
@@ -11,4 +12,8 @@ type ShowCategory {
 type Show {
     title: String
     artworkUrl:String
+}
+
+input SearchFilter {
+    title: String
 }
